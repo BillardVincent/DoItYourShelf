@@ -1,8 +1,8 @@
 package fr.DIYshelf.DoItYourshelf.Beans;
 
+
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import fr.DIYshelf.DoItYourshelf.Enum.Formats;
 import fr.DIYshelf.DoItYourshelf.Enum.Units;
@@ -22,6 +22,8 @@ public class Article extends Entitie{
 	private Double price;
 	private String placeOfBuying;
 	private Boolean Bought;
+	@ManyToOne
+	private User user;
 
   
     public String getType() {
