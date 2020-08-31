@@ -3,12 +3,13 @@ package fr.DIYshelf.DoItYourshelf.Repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import fr.DIYshelf.DoItYourshelf.Beans.Article;
+import fr.DIYshelf.DoItYourshelf.Beans.User;
 
-public interface ArticleRepository extends JpaRepository<Article, Integer>{
+public interface UserRepository extends JpaRepository<User, Integer>{
 
-	@Query("select a from Article a where a.name = ?1")
-	public Article getArticleByName (String name);
+	@Query("select u from User u where u.name = ?1")
+	public User getUserByName (String name);
+	
 	
 	// TO DO
 		// Page<Article> findByBodyContaining(String kw, Pageable p);

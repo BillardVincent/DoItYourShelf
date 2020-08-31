@@ -19,6 +19,15 @@
 	</properties>
 
 	<dependencies>
+	
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -35,7 +44,20 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt</artifactId>
+    <version>0.9.1</version>
+</dependency>
+		
 		<!-- Log4J  pour springboot - rechercher log4j api et log4j core sur Maven repo-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -48,61 +70,32 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.46</version>
 		</dependency>
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
-		</dependency>		
+		
+<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 <dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-email</artifactId>
-    <version>1.5</version>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-all</artifactId>
+    <version>2.0.2-beta</version>
+    <scope>test</scope>
 </dependency>
 
-		
-	<!-- ajout dépendances pour mariaDB et pour mise en ligne sur sereur -->	
-	<!-- essai, ajout d'une dépendance pour compatibilté java 11 -->
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-<!-- j'ajoute le connecteur mariadb https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
-		<dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-			<version>2.6.0</version>
-		</dependency>	
-		<!-- traitement des json -->
+	
 		<dependency>
     		<groupId>org.json</groupId>
     		<artifactId>json</artifactId>
    			 <version>20090211</version>
 		</dependency>
-		<!-- envoie de mail -->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
-		</dependency>
-		<!-- et tjs pour le mail -->
-		<dependency>
-    		<groupId>org.apache.commons</groupId>
-   			 <artifactId>commons-email</artifactId>
-    		<version>1.5</version>
-		</dependency>
-		<!-- ajout dépendance pour deploiement en mode war -->
-<!-- 	<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-tomcat</artifactId>
-    <scope>provided</scope>
-</dependency> -->
-	</dependencies>
 
+	</dependencies>
 
 	<packaging>jar</packaging>
 	<build>

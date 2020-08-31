@@ -11,6 +11,8 @@ private String name;
 private String password;
 @OneToMany
 private Set<Article> articles;
+
+
 public String getName() {
 	return name;
 }
@@ -33,12 +35,6 @@ public void setArticles(Set<Article> articles) {
 }
 public User() {
 	super();
-}
-public User(String name, String password, Set<Article> articles) {
-	super();
-	this.name = name;
-	this.password = password;
-	this.articles = articles;
 }
 
 

@@ -1,7 +1,6 @@
-package fr.dawan.QuestionQCM;
+package fr.DIYshelf.DoItYourshelf.Test;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import fr.DIYshelf.DoItYourshelf.Beans.Article;
 

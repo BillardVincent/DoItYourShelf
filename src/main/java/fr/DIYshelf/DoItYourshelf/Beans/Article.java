@@ -1,8 +1,12 @@
 package fr.DIYshelf.DoItYourshelf.Beans;
 
 
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import fr.DIYshelf.DoItYourshelf.Enum.Formats;
 import fr.DIYshelf.DoItYourshelf.Enum.Units;
@@ -18,10 +22,14 @@ public class Article extends Entitie{
     private Units unit2;// (fac.)
     private Units unit3;// (fac.)
 	private Units unit4;// (fac.)
-	private String photo;// (URL)
+    @OneToMany
+    private Set<InstanceOfArticle> instOfArt;
+	@OneToMany
+	private Set<Photo> photos;// (URL)
 	private Double price;
 	private String placeOfBuying;
-	private Boolean Bought;
+	@ManyToOne
+	private Rangement rangement;
 	@ManyToOne
 	private User user;
 
@@ -66,48 +74,27 @@ public class Article extends Entitie{
         this.format2 = format2;
     }
 
-    public Units getUnit1() {
-        return unit1;
-    }
+  
 
-    public void setUnit1(Units unit1) {
-        this.unit1 = unit1;
-    }
+   
+    public Set<Photo> getPhotos() {
+		return photos;
+	}
 
-    public Units getUnit2() {
-        return unit2;
-    }
+	public void setPhotos(Set<Photo> photos) {
+		this.photos = photos;
+	}
 
-    public void setUnit2(Units unit2) {
-        this.unit2 = unit2;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public Units getUnit3() {
-        return unit3;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public void setUnit3(Units unit3) {
-        this.unit3 = unit3;
-    }
-
-    public Units getUnit4() {
-        return unit4;
-    }
-
-    public void setUnit4(Units unit4) {
-        this.unit4 = unit4;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-
-    public Double getPrice() {
+	
+	public Double getPrice() {
         return price;
     }
 
@@ -123,32 +110,57 @@ public class Article extends Entitie{
         this.placeOfBuying = placeOfBuying;
     }
 
-    public Boolean getBought() {
-        return Bought;
-    }
 
-    public void setBought(Boolean bought) {
-        Bought = bought;
-    }
+	public Set<InstanceOfArticle> getInstOfArt() {
+		return instOfArt;
+	}
 
-    public Article(int id, String type, String name, String alias, Formats format, Formats format2, Units unit1, Units unit2, Units unit3, Units unit4, String photo, Double price, String placeOfBuying, Boolean bought) {
-        this.id = id;
-        this.type = type;
-        this.name = name;
-        this.alias = alias;
-        this.format = format;
-        this.format2 = format2;
-        this.unit1 = unit1;
-        this.unit2 = unit2;
-        this.unit3 = unit3;
-        this.unit4 = unit4;
-        this.photo = photo;
+	public void setInstOfArt(Set<InstanceOfArticle> instOfArt) {
+		this.instOfArt = instOfArt;
+	}
 
-        this.price = price;
-        this.placeOfBuying = placeOfBuying;
-        Bought = bought;
-    }
+	public Rangement getRangement() {
+		return rangement;
+	}
 
-    public Article() {
+	public void setRangement(Rangement rangement) {
+		this.rangement = rangement;
+	}
+
+	
+	
+	public Units getUnit1() {
+		return unit1;
+	}
+
+	public void setUnit1(Units unit1) {
+		this.unit1 = unit1;
+	}
+
+	public Units getUnit2() {
+		return unit2;
+	}
+
+	public void setUnit2(Units unit2) {
+		this.unit2 = unit2;
+	}
+
+	public Units getUnit3() {
+		return unit3;
+	}
+
+	public void setUnit3(Units unit3) {
+		this.unit3 = unit3;
+	}
+
+	public Units getUnit4() {
+		return unit4;
+	}
+
+	public void setUnit4(Units unit4) {
+		this.unit4 = unit4;
+	}
+
+	public Article() {
     }
 }
