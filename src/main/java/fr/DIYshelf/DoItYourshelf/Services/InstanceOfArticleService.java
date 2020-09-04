@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.DIYshelf.DoItYourshelf.Beans.Article;
-import fr.DIYshelf.DoItYourshelf.Beans.InstanceOfArticle;
+import fr.DIYshelf.DoItYourshelf.Beans.QuantityOfArticle;
 import fr.DIYshelf.DoItYourshelf.Repositories.ArticleRepository;
 import fr.DIYshelf.DoItYourshelf.Repositories.InstanceOfArticleRepository;
 
@@ -19,14 +19,13 @@ public class InstanceOfArticleService {
 	 ArticleRepository articleRepo;
 	 
 	 
-	 public void CreateOrUpdate(InstanceOfArticle instOfArt) {
+	 public void CreateOrUpdate(QuantityOfArticle instOfArt) {
 		 
 	 }
 	 
-public Set<InstanceOfArticle> getAllFromArticle(Article article) {
-	Set<InstanceOfArticle> list = (articleRepo.getArticleByName(article.getName()).getInstOfArt());
+public Set<QuantityOfArticle> getAllFromArticle(Article article) {
 	
-	return list;
+	return articleRepo.getArticleByName(article.getName()).getInstOfArt();
 		 
 	 }
 }

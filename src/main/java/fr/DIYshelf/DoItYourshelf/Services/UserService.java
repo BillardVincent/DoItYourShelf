@@ -1,5 +1,7 @@
 package fr.DIYshelf.DoItYourshelf.Services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +19,8 @@ public class UserService {
 		
 	}
 	
-	public User getUserByName(String name) {
-		User user = userRepository.getUserByName(name);
+	public Optional<User> getUserByName(String name) {
+		Optional<User> user = userRepository.getUserByName(name);
 		return user;
 	}
 	

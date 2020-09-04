@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fr.dawan</groupId>
 	<artifactId>QCMSpringQuestion</artifactId>
@@ -19,8 +20,8 @@
 	</properties>
 
 	<dependencies>
-	
-	<dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>
@@ -31,7 +32,8 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<!-- Le starter web a dejà un equivalent log4j. on doit l'exclure pour ne pas avoir de doublons et de conflit-->
+			<!-- Le starter web a dejà un equivalent log4j. on doit l'exclure pour 
+				ne pas avoir de doublons et de conflit -->
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
@@ -52,13 +54,14 @@
 			</exclusions>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
-<dependency>
-    <groupId>io.jsonwebtoken</groupId>
-    <artifactId>jjwt</artifactId>
-    <version>0.9.1</version>
-</dependency>
-		
-		<!-- Log4J  pour springboot - rechercher log4j api et log4j core sur Maven repo-->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
+		<!-- Log4J pour springboot - rechercher log4j api et log4j core sur Maven 
+			repo -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-log4j2</artifactId>
@@ -79,20 +82,20 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.46</version>
 		</dependency>
-		
-<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
-<dependency>
-    <groupId>org.mockito</groupId>
-    <artifactId>mockito-all</artifactId>
-    <version>2.0.2-beta</version>
-    <scope>test</scope>
-</dependency>
 
-	
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 		<dependency>
-    		<groupId>org.json</groupId>
-    		<artifactId>json</artifactId>
-   			 <version>20090211</version>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>2.0.2-beta</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20090211</version>
 		</dependency>
 
 	</dependencies>
@@ -115,25 +118,25 @@
 					</execution>
 				</executions>
 			</plugin>
-			
-			<plugin> 
 
-                <!-- Building an executable jar -->
+			<plugin>
 
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                  <archive>
-                    <manifest>
+				<!-- Building an executable jar -->
 
-                    <!-- give full qualified name of your main class-->
-                      <mainClass>/QCMSpringQuestion/src/main/java/fr/dawan/QuestionQCM/Demo1Application.java</mainClass>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<archive>
+						<manifest>
 
-                    </manifest>
-                  </archive>
-                </configuration>
-    </plugin>
+							<!-- give full qualified name of your main class -->
+							<mainClass>/QCMSpringQuestion/src/main/java/fr/dawan/QuestionQCM/Demo1Application.java</mainClass>
+
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

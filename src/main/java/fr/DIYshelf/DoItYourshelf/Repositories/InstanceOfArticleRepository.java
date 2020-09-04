@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import fr.DIYshelf.DoItYourshelf.Beans.Article;
-import fr.DIYshelf.DoItYourshelf.Beans.InstanceOfArticle;
+import fr.DIYshelf.DoItYourshelf.Beans.QuantityOfArticle;
 
-public interface InstanceOfArticleRepository extends JpaRepository<InstanceOfArticle, Integer>{
+public interface InstanceOfArticleRepository extends JpaRepository<QuantityOfArticle, Integer>{
 
 }

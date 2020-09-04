@@ -22,8 +22,10 @@ public class Article extends Entitie{
     private Units unit2;// (fac.)
     private Units unit3;// (fac.)
 	private Units unit4;// (fac.)
+	@ManyToOne
+	private ArticlePattern articlePattern;
     @OneToMany
-    private Set<InstanceOfArticle> instOfArt;
+    private Set<QuantityOfArticle> instOfArt;
 	@OneToMany
 	private Set<Photo> photos;// (URL)
 	private Double price;
@@ -77,7 +79,15 @@ public class Article extends Entitie{
   
 
    
-    public Set<Photo> getPhotos() {
+    public ArticlePattern getArticlePattern() {
+		return articlePattern;
+	}
+
+	public void setArticlePattern(ArticlePattern articlePattern) {
+		this.articlePattern = articlePattern;
+	}
+
+	public Set<Photo> getPhotos() {
 		return photos;
 	}
 
@@ -111,11 +121,11 @@ public class Article extends Entitie{
     }
 
 
-	public Set<InstanceOfArticle> getInstOfArt() {
+	public Set<QuantityOfArticle> getInstOfArt() {
 		return instOfArt;
 	}
 
-	public void setInstOfArt(Set<InstanceOfArticle> instOfArt) {
+	public void setInstOfArt(Set<QuantityOfArticle> instOfArt) {
 		this.instOfArt = instOfArt;
 	}
 
@@ -163,4 +173,20 @@ public class Article extends Entitie{
 
 	public Article() {
     }
+
+	@Override
+	public String toString() {
+		return "Article [type=" + type + ", name=" + name + ", alias=" + alias + ", format=" + format + ", format2="
+				+ format2 + ", unit1=" + unit1 + ", unit2=" + unit2 + ", unit3=" + unit3 + ", unit4=" + unit4
+				+ ", instOfArt=" + instOfArt + ", photos=" + photos + ", price=" + price + ", placeOfBuying="
+				+ placeOfBuying + ", rangement=" + rangement + ", user=" + user + ", id=" + id + ", getType()="
+				+ getType() + ", getName()=" + getName() + ", getAlias()=" + getAlias() + ", getFormat()=" + getFormat()
+				+ ", getFormat2()=" + getFormat2() + ", getPhotos()=" + getPhotos() + ", getUser()=" + getUser()
+				+ ", getPrice()=" + getPrice() + ", getPlaceOfBuying()=" + getPlaceOfBuying() + ", getInstOfArt()="
+				+ getInstOfArt() + ", getRangement()=" + getRangement() + ", getUnit1()=" + getUnit1() + ", getUnit2()="
+				+ getUnit2() + ", getUnit3()=" + getUnit3() + ", getUnit4()=" + getUnit4() + ", getId()=" + getId()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
 }
+

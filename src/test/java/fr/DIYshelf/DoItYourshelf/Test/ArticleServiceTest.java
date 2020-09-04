@@ -3,23 +3,25 @@ package fr.DIYshelf.DoItYourshelf.Test;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import fr.DIYshelf.DoItYourshelf.Beans.Article;
-import fr.DIYshelf.DoItYourshelf.ElementsMock.ArticleMock;
+import fr.DIYshelf.DoItYourshelf.ElementsMock.ArticleRandGen;
 import fr.DIYshelf.DoItYourshelf.Repositories.ArticleRepository;
 import fr.DIYshelf.DoItYourshelf.Services.ArticleService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@ActiveProfiles("TEST")
+
 public class ArticleServiceTest {
 	
 	@InjectMocks
@@ -29,7 +31,7 @@ public class ArticleServiceTest {
 	
 	@Test
 	public void ArticleServiceAvecInjectMock() {
-		ArticleMock articleMock = new ArticleMock();
+		ArticleRandGen articleMock = new ArticleRandGen();
 		Article article = articleMock.ArticleMocked("test1");
 		String name =article.getName();
 		

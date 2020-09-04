@@ -1,4 +1,4 @@
-package fr.DIYshelf.DoItYourshelf.ressources;
+package fr.DIYshelf.DoItYourshelf.Ressources;
 
 public class ConstantStrings {
 

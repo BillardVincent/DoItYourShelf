@@ -1,6 +1,5 @@
 package fr.DIYshelf.DoItYourshelf.Beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -15,9 +14,10 @@ public class Project extends Entitie{
     private ProjectType projectType;
     @OneToMany
     private List<Photo> photosProject;
-
+    @ManyToMany
+    private List<Project> Projects;
     @OneToMany
-    private List<InstanceOfArticle> articles;
+    private List<QuantityOfArticle> articles;
     @ManyToMany
     private List<BluePrint> bluePrints;
 	public String getName() {
@@ -38,10 +38,10 @@ public class Project extends Entitie{
 	public void setPhotosProject(List<Photo> photosProject) {
 		this.photosProject = photosProject;
 	}
-	public List<InstanceOfArticle> getArticles() {
+	public List<QuantityOfArticle> getArticles() {
 		return articles;
 	}
-	public void setArticles(List<InstanceOfArticle> articles) {
+	public void setArticles(List<QuantityOfArticle> articles) {
 		this.articles = articles;
 	}
 	public List<BluePrint> getBluePrints() {
@@ -49,6 +49,12 @@ public class Project extends Entitie{
 	}
 	public void setBluePrints(List<BluePrint> bluePrints) {
 		this.bluePrints = bluePrints;
+	}
+	public List<Project> getProjects() {
+		return Projects;
+	}
+	public void setProjects(List<Project> projects) {
+		Projects = projects;
 	}
 
    

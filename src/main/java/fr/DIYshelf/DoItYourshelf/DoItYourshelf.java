@@ -6,11 +6,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class Demo1Application {
+public class DoItYourshelf {
 
 	
 	public static void main(String[] args)  {
-		SpringApplication.run(Demo1Application.class, args);
+		SpringApplication.run(DoItYourshelf.class, args);
 	}
 
 }

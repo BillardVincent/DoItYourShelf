@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import fr.DIYshelf.DoItYourshelf.Enum.Units;
 
 @Entity
-public class InstanceOfArticle extends Entitie {
+public class QuantityOfArticle extends Entitie {
 	
 	@ManyToOne
 	private Article motherArticle;
@@ -19,6 +19,8 @@ public class InstanceOfArticle extends Entitie {
     private int unit2;// (fac.)
     private int unit3;// (fac.)
 	private int unit4;// (fac.)
+	
+	
 	public Article getMotherArticle() {
 		return motherArticle;
 	}
@@ -56,6 +58,11 @@ public class InstanceOfArticle extends Entitie {
 	}
 	public void setUnit4(int unit4) {
 		this.unit4 = unit4;
+	}
+	@Override
+	public String toString() {
+		return "InstanceOfArticle [motherArticle=" + motherArticle + ", project=" + project + ", unit1=" + unit1
+				+ ", unit2=" + unit2 + ", unit3=" + unit3 + ", unit4=" + unit4 + "]";
 	}
 	
 
