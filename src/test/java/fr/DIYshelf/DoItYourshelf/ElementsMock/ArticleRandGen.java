@@ -3,8 +3,11 @@ package fr.DIYshelf.DoItYourshelf.ElementsMock;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import fr.DIYshelf.DoItYourshelf.Beans.Article;
 
+@Service
 public class ArticleRandGen {
 	
 	InstOfArticleRandGen ioarg= new InstOfArticleRandGen();

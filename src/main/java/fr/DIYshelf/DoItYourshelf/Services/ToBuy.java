@@ -1,6 +1,7 @@
 package fr.DIYshelf.DoItYourshelf.Services;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class ToBuy {
 		// je créé une liste d'article, qui ne contiendront qu'une seule instance d'art
 		Set<Article> artsToBuy = new HashSet<Article>();
 		//Recup la list d'articles de l'utilisateur
-		User user_DB = userService.getUserByName(user.getUsername())
-				.orElseThrow(() -> new RuntimeException("Error: User not found."));
+		Optional<User> optuser = userService.getUserByName(user.getUsername());
+		User user_DB = optuser.orElseThrow(() -> new RuntimeException("Error: User not found."));
 		Set<Article> UserArticle = user_DB.getArticles();
 		// Pour chaque article...
 		

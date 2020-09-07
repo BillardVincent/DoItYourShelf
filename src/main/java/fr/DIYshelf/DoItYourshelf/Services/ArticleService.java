@@ -1,6 +1,7 @@
 package fr.DIYshelf.DoItYourshelf.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,9 @@ public class ArticleService {
 }
 	public Article FindByName(String name) {
 		return articleRepository.getArticleByName(name);
+	}
+
+	public List<Article> FindAllByUser(int userId) {
+				return articleRepository.findAllByUser(userId) ;
 	}
 }

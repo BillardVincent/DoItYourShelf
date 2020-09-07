@@ -9,11 +9,11 @@
 		<version>2.2.4.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>fr.dawan</groupId>
-	<artifactId>QCMSpringQuestion</artifactId>
+	<groupId>fr.DIYshelf</groupId>
+	<artifactId>Pappac</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo-1</name>
-	<description>QuestionManager</description>
+	<description>PetitAssistantPourProjetAmateurCréatif</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -120,23 +120,49 @@
 			</plugin>
 
 			<plugin>
-
 				<!-- Building an executable jar -->
-
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.1.0</version>
 				<configuration>
 					<archive>
 						<manifest>
-
 							<!-- give full qualified name of your main class -->
-							<mainClass>/QCMSpringQuestion/src/main/java/fr/dawan/QuestionQCM/Demo1Application.java</mainClass>
-
+							<mainClass>/DoItYourShelfBack/src/main/java/fr/DIYshelf/DoItYourshelf/DoItYourshelf.java</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
 			</plugin>
+			<plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>2.2.4.RELEASE</version>
+        <executions>
+          <execution>
+            <id>repackage</id>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+            <configuration>
+              <mainClass>fr.DIYshelf.DoItYourshelf.DoItYourshelf</mainClass>
+              <layout>JAR</layout>
+            </configuration>
+          </execution>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+            <configuration>
+              <mainClass>fr.DIYshelf.DoItYourshelf.DoItYourshelf</mainClass>
+              <layout>JAR</layout>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>fr.DIYshelf.DoItYourshelf.DoItYourshelf</mainClass>
+          <layout>JAR</layout>
+        </configuration>
+      </plugin>
 		</plugins>
 	</build>
 
