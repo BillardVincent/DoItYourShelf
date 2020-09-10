@@ -1,7 +1,6 @@
 package fr.DIYshelf.DoItYourshelf.Controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.DIYshelf.DoItYourshelf.Beans.Article;
 import fr.DIYshelf.DoItYourshelf.Beans.User;
+import fr.DIYshelf.DoItYourshelf.DTO.response.MessageResponse;
+import fr.DIYshelf.DoItYourshelf.Ressources.ConstantStrings;
 import fr.DIYshelf.DoItYourshelf.Security.AuthTokenFilter;
 import fr.DIYshelf.DoItYourshelf.Security.JwtUtils;
 import fr.DIYshelf.DoItYourshelf.Services.ArticleService;
@@ -38,32 +39,29 @@ public class ArticleController {
 	@Autowired
 	private UserService  userService;
 
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-	@PostMapping(value = "/createOrUpdate", consumes = "application/json", produces = "application/json")
-	public String Create(HttpServletRequest request, @RequestBody Article articleFromFront, @RequestBody User userFromFront) {
+	@PostMapping(value = "/createOrUpdate")
+	public MessageResponse Create(HttpServletRequest request, @RequestBody Article articleFromFront) {
+		System.out.println("inside article/createOrUpdate");
 		String jwt = authTokenFilter.parseJwt(request);
 		String usernameFromToken= jwtUtils.getUserNameFromJwtToken(jwt);
-		String message;
-		if(userFromFront.getUsername().equals(usernameFromToken)) {
-			User user = userService.getUserByName(usernameFromToken).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + usernameFromToken));
+		System.out.println(articleFromFront.getName());
+			User user = userService.getUserByName(usernameFromToken).orElseThrow(() -> new UsernameNotFoundException(ConstantStrings.USER_NOT_FOUND + usernameFromToken));
 			articleFromFront.setUser(user);
 			articleService.saveOrUpdate(articleFromFront);
-			message = "JobDone";
-		}else {
-			message ="Error";
-		}
+		MessageResponse messageResp =new MessageResponse(ConstantStrings.SUCCES);
 		
-		
-		return message;
+		return messageResp;
 	}
 
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	@GetMapping(value = "")
 	public List<Article> ListAllArticle(HttpServletRequest request) {
+		System.out.println("inside article/");
 		String jwt = authTokenFilter.parseJwt(request);
 		String usernameFromToken= jwtUtils.getUserNameFromJwtToken(jwt);
+		System.out.println("inside article/ -- user from token =" + usernameFromToken);
+
 		User user = userService.getUserByName(usernameFromToken)
-				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + usernameFromToken));
+				.orElseThrow(() -> new UsernameNotFoundException(ConstantStrings.USER_NOT_FOUND + usernameFromToken));
 		int userId = user.getId();
 		List<Article> list = articleService.FindAllByUser(userId);
 		return list;
