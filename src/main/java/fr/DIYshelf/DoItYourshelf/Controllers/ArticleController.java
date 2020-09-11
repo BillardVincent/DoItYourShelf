@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.DIYshelf.DoItYourshelf.Beans.Article;
 import fr.DIYshelf.DoItYourshelf.Beans.User;
+import fr.DIYshelf.DoItYourshelf.DTO.request.ArticleRequest;
 import fr.DIYshelf.DoItYourshelf.Security.AuthTokenFilter;
 import fr.DIYshelf.DoItYourshelf.Security.JwtUtils;
 import fr.DIYshelf.DoItYourshelf.Services.ArticleService;
@@ -38,26 +39,27 @@ public class ArticleController {
 	@Autowired
 	private UserService  userService;
 
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-	@PostMapping(value = "/createOrUpdate", consumes = "application/json", produces = "application/json")
-	public String Create(HttpServletRequest request, @RequestBody Article articleFromFront, @RequestBody User userFromFront) {
+	@PostMapping(value = "/createOrUpdate")
+	public void Create(HttpServletRequest request, @RequestBody ArticleRequest articleFromAng) {
+		System.out.println("creation");
+		Article articleFromFront = new Article();
+		if (articleFromAng.id!=0) articleFromFront.setId(articleFromAng.id);
+		if (!articleFromAng.name.equals(""))articleFromFront.setName(articleFromAng.name);
+		if (!articleFromAng.alias.equals(""))articleFromFront.setAlias(articleFromAng.alias);
 		String jwt = authTokenFilter.parseJwt(request);
 		String usernameFromToken= jwtUtils.getUserNameFromJwtToken(jwt);
 		String message;
-		if(userFromFront.getUsername().equals(usernameFromToken)) {
-			User user = userService.getUserByName(usernameFromToken).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + usernameFromToken));
-			articleFromFront.setUser(user);
-			articleService.saveOrUpdate(articleFromFront);
-			message = "JobDone";
-		}else {
-			message ="Error";
-		}
-		
-		
-		return message;
+		System.out.println("creation2");
+
+		User user = userService.getUserByName(usernameFromToken).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + usernameFromToken));
+		articleFromFront.setUser(user);
+		System.out.println(articleFromFront);
+		articleService.saveOrUpdate(articleFromFront);
+		message = "JobDone";
+		System.out.println(message);
+
 	}
 
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	@GetMapping(value = "")
 	public List<Article> ListAllArticle(HttpServletRequest request) {
 		String jwt = authTokenFilter.parseJwt(request);
