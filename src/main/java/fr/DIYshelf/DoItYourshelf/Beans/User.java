@@ -25,7 +25,8 @@ private Set<Project> projects;
 			joinColumns = @JoinColumn(name = "user_id"), 
 			inverseJoinColumns = @JoinColumn(name = "role_id"))
 private Set<Role> roles = new HashSet<>();
-
+@OneToMany
+private Set<ArticlePattern> artPattern;
 
 
 
@@ -55,9 +56,6 @@ public Set<Article> getArticles() {
 public void setArticles(Set<Article> articles) {
 	this.articles = articles;
 }
-public User() {
-	super();
-}
 
 public String getEmail() {
 	return email;
@@ -72,11 +70,20 @@ public void setRoles(Set<Role> roles) {
 	this.roles = roles;
 }
 
-
+public Set<ArticlePattern> getArtPattern() {
+	return artPattern;
+}
+public void setArtPattern(Set<ArticlePattern> artPattern) {
+	this.artPattern = artPattern;
+}
 public User(String username, String email, String password) {
 	this.username = username;
 	this.email = email;
 	this.password = password;
 }
+public User() {
+	super();
+}
+
 
 }

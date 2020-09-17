@@ -1,6 +1,5 @@
 package fr.DIYshelf.DoItYourshelf.Controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,85 +14,67 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.DIYshelf.DoItYourshelf.Beans.Article;
 import fr.DIYshelf.DoItYourshelf.Beans.ArticlePattern;
 import fr.DIYshelf.DoItYourshelf.Beans.User;
-import fr.DIYshelf.DoItYourshelf.DTO.request.ArticleRequest;
-import fr.DIYshelf.DoItYourshelf.DTO.response.ArticleResponse;
+import fr.DIYshelf.DoItYourshelf.DTO.request.ArticlePatternRequest;
 import fr.DIYshelf.DoItYourshelf.Exceptions.ElementNotFoundException;
 import fr.DIYshelf.DoItYourshelf.Security.AuthTokenFilter;
 import fr.DIYshelf.DoItYourshelf.Security.JwtUtils;
 import fr.DIYshelf.DoItYourshelf.Services.ArticlePatternService;
-import fr.DIYshelf.DoItYourshelf.Services.ArticleService;
 import fr.DIYshelf.DoItYourshelf.Services.UserService;
 
 @RestController
 @CrossOrigin(origins = { "http://localhost:4200", "http://localhost:8080" })
-@RequestMapping("/article")
-public class ArticleController {
+@RequestMapping("/pattern")
+public class ArticlePatternController {
 
 	@Autowired
-	ArticleService articleService;
+	ArticlePatternService articlePatternService;
 	@Autowired
 	private JwtUtils jwtUtils;
 	
 	@Autowired
-	private AuthTokenFilter  authTokenFilter;
+	private AuthTokenFilter authTokenFilter;
 
 	@Autowired
 	private UserService  userService;
-	@Autowired
-	private ArticlePatternService  artPatService;
-
 
 	@PostMapping(value = "/createOrUpdate")
-	public void Create(HttpServletRequest request, @RequestBody ArticleRequest articleFromAng) {
-		System.out.println("creation");
-		Article articleFromFront = new Article();
-		if (articleFromAng.id!=0) articleFromFront.setId(articleFromAng.id);
-		if (!articleFromAng.name.equals(""))articleFromFront.setName(articleFromAng.name);
-		if (!articleFromAng.alias.equals(""))articleFromFront.setAlias(articleFromAng.alias);
-		
-		if (articleFromAng.artPatId!=0) {
-			ArticlePattern artPat = artPatService.findById(articleFromAng.artPatId).orElseThrow(() ->new ElementNotFoundException("Pattern Not Found "));
-			articleFromFront.setArticlePattern(artPat);
-		}
-			
+	public void Create(HttpServletRequest request, @RequestBody ArticlePatternRequest articlePatternFromAng) {
+		System.out.println(articlePatternFromAng.name);
+		System.out.println(articlePatternFromAng.id);
+		System.out.println(articlePatternFromAng.formatId);
 
+		ArticlePattern articlePatternFromFront = articlePatternService.artReqToArticlePattern(articlePatternFromAng);
+		/*if (articlePatternFromAng.id!=0) articlePatternFromFront.setId(articlePatternFromAng.id);
+		if (!articlePatternFromAng.name.equals(""))articlePatternFromFront.setName(articlePatternFromAng.name);
+		*/
 		String jwt = authTokenFilter.parseJwt(request);
 		String usernameFromToken= jwtUtils.getUserNameFromJwtToken(jwt);
-		String message;
-		System.out.println("creation2");
-
+		//String message;
 		User user = userService.getUserByName(usernameFromToken).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + usernameFromToken));
-		articleFromFront.setUser(user);
-		System.out.println(articleFromFront);
-		articleService.saveOrUpdate(articleFromFront);
-		message = "JobDone";
-		System.out.println(message);
+		articlePatternFromFront.setUser(user);
+		articlePatternService.saveOrUpdate(articlePatternFromFront);
+		//message = "JobDone";
+		//System.out.println(message);
 
 	}
 
 	@GetMapping(value = "")
-	public List<ArticleResponse> ListAllArticle(HttpServletRequest request) {
+	public List<ArticlePattern> ListAllArticlePattern(HttpServletRequest request) {
 		String jwt = authTokenFilter.parseJwt(request);
 		String usernameFromToken= jwtUtils.getUserNameFromJwtToken(jwt);
 		User user = userService.getUserByName(usernameFromToken)
 				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + usernameFromToken));
 		int userId = user.getId();
-		List<Article> listArt = articleService.FindAllByUser(userId);
-		List<ArticleResponse> list = new ArrayList<ArticleResponse>();
-		for (Article article : listArt) {
-			list.add(articleService.articleToArtResp(article));
-		}
+		List<ArticlePattern> list = articlePatternService.FindAllByUser(userId);
 		return list;
 	}
 	
 	@GetMapping(value="/details/{id}")
-	public ArticleResponse GetArticleDetailed(HttpServletRequest request, @PathVariable("id") int id) {
-		Article article = articleService.findById(id).orElseThrow(() -> new ElementNotFoundException("Article Not Found "));
-		ArticleResponse artResp = articleService.articleToArtResp(article);
-		return artResp;
+	public ArticlePattern GetArticlePatternDetailed(HttpServletRequest request, @PathVariable("id") int id) {
+		ArticlePattern articlePattern = articlePatternService.findById(id).orElseThrow(() -> new ElementNotFoundException("User Not Found with username: "));
+		return articlePattern;
 		
 	}
 }

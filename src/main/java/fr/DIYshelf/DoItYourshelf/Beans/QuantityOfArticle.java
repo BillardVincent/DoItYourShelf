@@ -1,12 +1,7 @@
 package fr.DIYshelf.DoItYourshelf.Beans;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
-import fr.DIYshelf.DoItYourshelf.Enum.Units;
 
 @Entity
 public class QuantityOfArticle extends Entitie {

@@ -1,6 +1,8 @@
-package fr.DIYshelf.DoItYourshelf.DTO.request;
+package fr.DIYshelf.DoItYourshelf.DTO.response;
 
-public class ArticleRequest {
+
+
+public class ArticleResponse{
 	public int id;
 	public String name;
 	public String alias;
@@ -8,3 +10,4 @@ public class ArticleRequest {
 	public String artPatName;
 
 }
+

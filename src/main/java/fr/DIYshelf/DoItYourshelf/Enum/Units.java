@@ -1,6 +1,6 @@
 package fr.DIYshelf.DoItYourshelf.Enum;
 
-
+/*
 public enum Units {
     M,
     CM,
@@ -20,3 +20,4 @@ public enum Units {
 
 
 }
+*/
