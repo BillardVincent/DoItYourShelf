@@ -13,7 +13,7 @@ import fr.DIYshelf.DoItYourshelf.Beans.User;
 public class ToBuy {
 
 	@Autowired
-	InstanceOfArticleService instOfArtServ;
+	QuantityOfArticleService instOfArtServ;
 	@Autowired
 	ArticleService articleService;
 	@Autowired

@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import fr.DIYshelf.DoItYourshelf.Beans.Article;
 import fr.DIYshelf.DoItYourshelf.Beans.QuantityOfArticle;
 import fr.DIYshelf.DoItYourshelf.Repositories.ArticleRepository;
-import fr.DIYshelf.DoItYourshelf.Repositories.InstanceOfArticleRepository;
+import fr.DIYshelf.DoItYourshelf.Repositories.QuantityOfArticleRepository;
 
 @Service
-public class InstanceOfArticleService {
+public class QuantityOfArticleService {
 	
 	 @Autowired
-	 InstanceOfArticleRepository instOfArtRepo;
+	 QuantityOfArticleRepository instOfArtRepo;
 	 @Autowired
 	 ArticleRepository articleRepo;
 	 
