@@ -23,7 +23,6 @@ import fr.DIYshelf.DoItYourshelf.Beans.Project;
 import fr.DIYshelf.DoItYourshelf.Beans.QuantityOfArticle;
 import fr.DIYshelf.DoItYourshelf.Beans.User;
 import fr.DIYshelf.DoItYourshelf.DTO.request.ArticleRequest;
-import fr.DIYshelf.DoItYourshelf.DTO.request.QuantityOfArticleRequest;
 import fr.DIYshelf.DoItYourshelf.DTO.response.ArticleResponse;
 import fr.DIYshelf.DoItYourshelf.Exceptions.ElementNotFoundException;
 import fr.DIYshelf.DoItYourshelf.Security.AuthTokenFilter;
@@ -43,10 +42,8 @@ public class ArticleController {
 	ArticleService articleService;
 	@Autowired
 	private JwtUtils jwtUtils;
-	
 	@Autowired
 	private AuthTokenFilter  authTokenFilter;
-
 	@Autowired
 	private UserService  userService;
 	@Autowired
@@ -84,8 +81,6 @@ public class ArticleController {
 		Set<QuantityOfArticle> firstList = new HashSet<QuantityOfArticle>();
 		firstList.add(qOfArt);
 		articleFromFront.setInstOfArt(firstList);
-		
-
 		
 		articleFromFront.setUser(user);
 
