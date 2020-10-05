@@ -16,12 +16,14 @@ public class Article extends Entitie{
    
 	@ManyToOne
 	private ArticlePattern articlePattern;
-    @OneToMany
+
+    @OneToMany(mappedBy = "motherArticle")
     private Set<QuantityOfArticle> instOfArt;
-	@OneToMany
+	@OneToMany(mappedBy = "article")
 	private Set<Photo> photos;// (URL)
 	private Double price;
 	private String placeOfBuying;
+	
 	@ManyToOne
 	private Rangement rangement;
 	@ManyToOne

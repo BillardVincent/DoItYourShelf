@@ -14,7 +14,7 @@ public class ArticlePattern extends Entitie{
 	@ManyToOne
 	 private Format format; //(longueur, surface, volume unités boite NonComptable)
 	   
-		@OneToMany
+		@OneToMany(mappedBy = "articlePattern")
 		private Set<Article> articles;
 		@ManyToOne
 		private User user;

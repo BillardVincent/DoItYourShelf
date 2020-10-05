@@ -6,5 +6,11 @@ public class ArticleRequest {
 	public String alias;
 	public int artPatId;
 	public String artPatName;
+	public int projectId;
+	public int qOfArtId;
+	public double quantity1;
+	public double quantity2;
+	public double quantity3;
+
 
 }

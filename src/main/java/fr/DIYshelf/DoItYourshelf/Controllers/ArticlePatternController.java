@@ -1,5 +1,6 @@
 package fr.DIYshelf.DoItYourshelf.Controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,12 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.DIYshelf.DoItYourshelf.Beans.ArticlePattern;
+import fr.DIYshelf.DoItYourshelf.Beans.QuantityOfArticle;
 import fr.DIYshelf.DoItYourshelf.Beans.User;
 import fr.DIYshelf.DoItYourshelf.DTO.request.ArticlePatternRequest;
+import fr.DIYshelf.DoItYourshelf.DTO.request.QuantityOfArticleRequest;
+import fr.DIYshelf.DoItYourshelf.DTO.response.ArticlePatternResponse;
 import fr.DIYshelf.DoItYourshelf.Exceptions.ElementNotFoundException;
 import fr.DIYshelf.DoItYourshelf.Security.AuthTokenFilter;
 import fr.DIYshelf.DoItYourshelf.Security.JwtUtils;
 import fr.DIYshelf.DoItYourshelf.Services.ArticlePatternService;
+import fr.DIYshelf.DoItYourshelf.Services.QuantityOfArticleService;
 import fr.DIYshelf.DoItYourshelf.Services.UserService;
 
 @RestController
@@ -38,13 +43,11 @@ public class ArticlePatternController {
 
 	@Autowired
 	private UserService  userService;
+	
+
 
 	@PostMapping(value = "/createOrUpdate")
 	public void Create(HttpServletRequest request, @RequestBody ArticlePatternRequest articlePatternFromAng) {
-		System.out.println(articlePatternFromAng.name);
-		System.out.println(articlePatternFromAng.id);
-		System.out.println(articlePatternFromAng.formatId);
-
 		ArticlePattern articlePatternFromFront = articlePatternService.artReqToArticlePattern(articlePatternFromAng);
 		/*if (articlePatternFromAng.id!=0) articlePatternFromFront.setId(articlePatternFromAng.id);
 		if (!articlePatternFromAng.name.equals(""))articlePatternFromFront.setName(articlePatternFromAng.name);
@@ -54,6 +57,7 @@ public class ArticlePatternController {
 		//String message;
 		User user = userService.getUserByName(usernameFromToken).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + usernameFromToken));
 		articlePatternFromFront.setUser(user);
+		
 		articlePatternService.saveOrUpdate(articlePatternFromFront);
 		//message = "JobDone";
 		//System.out.println(message);
@@ -61,14 +65,19 @@ public class ArticlePatternController {
 	}
 
 	@GetMapping(value = "")
-	public List<ArticlePattern> ListAllArticlePattern(HttpServletRequest request) {
+	public List<ArticlePatternResponse> ListAllArticlePattern(HttpServletRequest request) {
 		String jwt = authTokenFilter.parseJwt(request);
 		String usernameFromToken= jwtUtils.getUserNameFromJwtToken(jwt);
 		User user = userService.getUserByName(usernameFromToken)
 				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + usernameFromToken));
 		int userId = user.getId();
-		List<ArticlePattern> list = articlePatternService.FindAllByUser(userId);
-		return list;
+		List<ArticlePattern> listArtPat = articlePatternService.FindAllByUser(userId);
+		List<ArticlePatternResponse> listArtPatRep = new ArrayList<ArticlePatternResponse>();
+			for (ArticlePattern artPat : listArtPat) {
+				listArtPatRep.add(articlePatternService.artPatToArtPatResp(artPat));
+			}
+
+		return listArtPatRep;
 	}
 	
 	@GetMapping(value="/details/{id}")

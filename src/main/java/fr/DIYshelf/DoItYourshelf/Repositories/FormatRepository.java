@@ -15,5 +15,8 @@ public interface FormatRepository extends JpaRepository<Format, Integer>{
 	@Query("select name from Format")
 	List<String> findAllFormatName();
 
+	@Query("select f from Format f where f.unitName = ?1")
+	Format findByUnitName(String UnitName);
+
 
 }

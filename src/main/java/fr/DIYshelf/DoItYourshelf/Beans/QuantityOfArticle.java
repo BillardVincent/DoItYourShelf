@@ -10,10 +10,9 @@ public class QuantityOfArticle extends Entitie {
 	private Article motherArticle;
 	@ManyToOne
 	private Project project;
-	private int unit1;
-    private int unit2;// (fac.)
-    private int unit3;// (fac.)
-	private int unit4;// (fac.)
+	private double unit1;
+    private double unit2;// (fac.)
+    private double unit3;// (fac.)
 	
 	
 	public Article getMotherArticle() {
@@ -30,34 +29,28 @@ public class QuantityOfArticle extends Entitie {
 	public void setProject(Project project) {
 		this.project = project;
 	}
-	public int getUnit1() {
+	public double getUnit1() {
 		return unit1;
 	}
-	public void setUnit1(int unit1) {
+	public void setUnit1(double unit1) {
 		this.unit1 = unit1;
 	}
-	public int getUnit2() {
+	public double getUnit2() {
 		return unit2;
 	}
-	public void setUnit2(int unit2) {
+	public void setUnit2(double unit2) {
 		this.unit2 = unit2;
 	}
-	public int getUnit3() {
+	public double getUnit3() {
 		return unit3;
 	}
-	public void setUnit3(int unit3) {
+	public void setUnit3(double unit3) {
 		this.unit3 = unit3;
-	}
-	public int getUnit4() {
-		return unit4;
-	}
-	public void setUnit4(int unit4) {
-		this.unit4 = unit4;
 	}
 	@Override
 	public String toString() {
 		return "InstanceOfArticle [motherArticle=" + motherArticle + ", project=" + project + ", unit1=" + unit1
-				+ ", unit2=" + unit2 + ", unit3=" + unit3 + ", unit4=" + unit4 + "]";
+				+ ", unit2=" + unit2 + ", unit3=" + unit3 + "]";
 	}
 	
 

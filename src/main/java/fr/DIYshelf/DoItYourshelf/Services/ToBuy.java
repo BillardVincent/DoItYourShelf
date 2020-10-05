@@ -51,7 +51,6 @@ public class ToBuy {
 				sumOfInstances.setUnit1(sumOfInstances.getUnit1() + (instanceOfArticle.getUnit1()) * inOrOut);
 				sumOfInstances.setUnit2(sumOfInstances.getUnit2() + (instanceOfArticle.getUnit2()) * inOrOut);
 				sumOfInstances.setUnit3(sumOfInstances.getUnit3() + (instanceOfArticle.getUnit3()) * inOrOut);
-				sumOfInstances.setUnit4(sumOfInstances.getUnit4() + (instanceOfArticle.getUnit4()) * inOrOut);
 				
 				
 

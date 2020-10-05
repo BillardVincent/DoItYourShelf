@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.DIYshelf.DoItYourshelf.Beans.Project;
 import fr.DIYshelf.DoItYourshelf.Beans.Role;
 import fr.DIYshelf.DoItYourshelf.Beans.User;
 import fr.DIYshelf.DoItYourshelf.DTO.request.LoginRequest;
@@ -29,8 +30,10 @@ import fr.DIYshelf.DoItYourshelf.DTO.response.MessageResponse;
 import fr.DIYshelf.DoItYourshelf.Enum.ERole;
 import fr.DIYshelf.DoItYourshelf.Repositories.RoleRepository;
 import fr.DIYshelf.DoItYourshelf.Repositories.UserRepository;
+import fr.DIYshelf.DoItYourshelf.Ressources.ConstantStrings;
 import fr.DIYshelf.DoItYourshelf.Security.JwtUtils;
 import fr.DIYshelf.DoItYourshelf.Security.UserDetailsImpl;
+import fr.DIYshelf.DoItYourshelf.Services.ProjectService;
 
 
 
@@ -46,6 +49,10 @@ public class AuthController {
 
 	@Autowired
 	RoleRepository roleRepository;
+	
+	@Autowired
+	ProjectService projectService;
+;
 	
 	@Autowired
 	PasswordEncoder encoder;
@@ -122,10 +129,12 @@ public class AuthController {
 				}
 			});
 		}
-
+		
 		
 		user.setRoles(roles);
 		userRepository.save(user);
+		// création du projet de stockage
+		projectService.createStorageProject(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}

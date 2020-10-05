@@ -27,7 +27,6 @@ public class OtherController {
 	@GetMapping(value="/formatsandunits")
 	public List<Format> getFormatsAndUnisList () {
 				List <Format> fnUList=  new ArrayList<Format>();
-				System.out.println(fnUServ.getAllFormat().size());
 
 				fnUList = fnUServ.getAllFormat();
 				System.out.println(fnUList.size());
@@ -39,11 +38,15 @@ public class OtherController {
 	}
 	
 	
+	
 	@PostMapping(value="/createFormat")
 	public void createFormat(@RequestBody FormatRequest formatFromFront) {
 			Format format = new Format();
 			format.setName(formatFromFront.name);
 			format.setUnit(formatFromFront.unit);
+			format.setUnitName(formatFromFront.unitName);
+			format.setNbDimension(formatFromFront.nbDimension);
+
 		fnUServ.save(format);
 		
 	}

@@ -34,6 +34,11 @@ public class FormatsAndUnitsService {
 	}
 
 
+	public Format getFormatByUnitName(String name) { 
+		return formatRepo.findByUnitName(name);
+	}
+
+
 	
 	
 	

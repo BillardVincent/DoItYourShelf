@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import fr.DIYshelf.DoItYourshelf.Beans.ArticlePattern;
 import fr.DIYshelf.DoItYourshelf.Beans.Format;
+import fr.DIYshelf.DoItYourshelf.Beans.User;
 import fr.DIYshelf.DoItYourshelf.DTO.request.ArticlePatternRequest;
 import fr.DIYshelf.DoItYourshelf.DTO.response.ArticlePatternResponse;
 import fr.DIYshelf.DoItYourshelf.Exceptions.ElementNotFoundException;
@@ -26,13 +27,12 @@ public class ArticlePatternService {
 	public void saveOrUpdate(ArticlePattern articlePattern) {
 		articlePatternRepository.save(articlePattern);
 
-		ArticlePattern articlePatternFromDB = articlePatternRepository.getArticlePatternByName(articlePattern.getName());
+		ArticlePattern articlePatternFromDB = findById(articlePattern.getId()).orElse(null);
 		
 		if(articlePatternFromDB == null) {
 			articlePatternRepository.save(articlePattern);
 		}
 		else {
-			
 			articlePatternFromDB.setName(articlePattern.getName());
 			articlePatternFromDB.setFormat(articlePattern.getFormat());
 			
@@ -43,9 +43,11 @@ public class ArticlePatternService {
 	
 	
 }
-	public ArticlePattern FindByName(String name) {
-		return articlePatternRepository.getArticlePatternByName(name);
+	/*
+	public ArticlePattern FindByName(String name, int userId) {
+		return articlePatternRepository.getArticlePatternByNameandUser(name, userId);
 	}
+	*/
 
 	public List<ArticlePattern> FindAllByUser(int userId) {
 				return articlePatternRepository.findAllByUser(userId) ;
@@ -59,8 +61,9 @@ public class ArticlePatternService {
 		ArticlePatternResponse artPatResp = new ArticlePatternResponse();
 		artPatResp.name=artPat.getName();
 		artPatResp.id=artPat.getId();
-		artPatResp.format=(artPat.getFormat().getName());
-		
+		if(artPat.getFormat()!=null) {
+			artPatResp.formatId=(artPat.getFormat().getId());
+		}
 		return artPatResp;
 	}
 	public ArticlePattern artReqToArticlePattern(ArticlePatternRequest artPatReq) {
@@ -69,6 +72,7 @@ public class ArticlePatternService {
 		artPat.setId(artPatReq.id);
 		Format format = fnUService.getFormat(artPatReq.formatId).orElseThrow(() ->new ElementNotFoundException("Format Not Found "));
 		artPat.setFormat(format);
+		
 		return artPat;
 	}
 }

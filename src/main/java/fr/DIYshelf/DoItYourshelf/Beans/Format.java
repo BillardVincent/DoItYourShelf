@@ -13,9 +13,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Format extends Entitie {
 
 	private String name;
+	private String unitName;
+	private int nbDimension;
 	private String unit;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "format")
 	@JsonIgnore
 	private Set<ArticlePattern> patterns;
 	
@@ -28,6 +30,18 @@ public class Format extends Entitie {
 	
 	
 	
+	public String getUnitName() {
+		return unitName;
+	}
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
+	}
+	public int getNbDimension() {
+		return nbDimension;
+	}
+	public void setNbDimension(int nbDimension) {
+		this.nbDimension = nbDimension;
+	}
 	public String getUnit() {
 		return unit;
 	}

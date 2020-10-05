@@ -16,16 +16,16 @@ public class User extends Entitie{
 private String username;
 private String email;
 private String password;
-@OneToMany
+@OneToMany (mappedBy = "user")
 private Set<Article> articles;
-@OneToMany
+@OneToMany (mappedBy = "user")
 private Set<Project> projects;
 @ManyToMany(fetch = FetchType.LAZY)
 @JoinTable(	name = "user_roles", 
 			joinColumns = @JoinColumn(name = "user_id"), 
 			inverseJoinColumns = @JoinColumn(name = "role_id"))
 private Set<Role> roles = new HashSet<>();
-@OneToMany
+@OneToMany (mappedBy = "user")
 private Set<ArticlePattern> artPattern;
 
 

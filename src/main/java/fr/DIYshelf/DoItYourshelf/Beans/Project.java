@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import fr.DIYshelf.DoItYourshelf.Enum.ProjectType;
@@ -11,13 +12,16 @@ import fr.DIYshelf.DoItYourshelf.Enum.ProjectType;
 @Entity
 public class Project extends Entitie{
     private String name;
+    private boolean isStorage;
     private ProjectType projectType;
-    @OneToMany
+    @ManyToOne
+    private User user;
+    @OneToMany (mappedBy = "project")
     private List<Photo> photosProject;
     @ManyToMany
     private List<Project> Projects;
-    @OneToMany
-    private List<QuantityOfArticle> articles;
+    @OneToMany (mappedBy = "project")
+    private List<QuantityOfArticle> quantityOfArticles;
     @ManyToMany
     private List<BluePrint> bluePrints;
 	public String getName() {
@@ -38,11 +42,11 @@ public class Project extends Entitie{
 	public void setPhotosProject(List<Photo> photosProject) {
 		this.photosProject = photosProject;
 	}
-	public List<QuantityOfArticle> getArticles() {
-		return articles;
+	public List<QuantityOfArticle> getQuantityOfArticles() {
+		return quantityOfArticles;
 	}
-	public void setArticles(List<QuantityOfArticle> articles) {
-		this.articles = articles;
+	public void setQuantityOfArticles(List<QuantityOfArticle> articles) {
+		this.quantityOfArticles = articles;
 	}
 	public List<BluePrint> getBluePrints() {
 		return bluePrints;
@@ -55,6 +59,18 @@ public class Project extends Entitie{
 	}
 	public void setProjects(List<Project> projects) {
 		Projects = projects;
+	}
+	public boolean isStorage() {
+		return isStorage;
+	}
+	public void setStorage(boolean isStorage) {
+		this.isStorage = isStorage;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 
    

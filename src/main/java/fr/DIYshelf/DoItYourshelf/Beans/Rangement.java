@@ -12,9 +12,9 @@ public class Rangement extends Entitie{
     private String pOfFurniture;
     private String shelf;
     private String place;
-    @OneToMany
+    @OneToMany (mappedBy = "rangement")
     private Set<BluePrint> blueprints;
-    @OneToMany
+    @OneToMany (mappedBy = "rangement")
     private Set<Article> articles;
     
 	public String getRoom() {
